@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bliss Point Media</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+        <script type="text/javascript">
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-58169108-4', 'auto');
+          ga('send', 'pageview');
+
+          $('#myButton').on('click', function() {
+            var sessionStart = $.cookie('_bpmStartSession');
+            var delta = -1;
+            if (typeof sessionStart != 'undefined') {
+              delta = new Date().getTime() - sessionStart;
+            }
+
+            ga('send', 'event', 'Event Category', 'Event Action', 'Event Label', {
+              'dimension1':  delta
+            });
+          });
+
+          /*This needs to run on every page load to ensure we pick up session start times*/
+          $(function() {
+            if (typeof $.cookie('_bpmStartSession') === 'undefined') {
+                $.cookie('_bpmStartSession', new Date().getTime(), { expires: new Date(new Date().getTime() + (30 * 60 * 1000)) });
+            }
+          });
+        </script>
+    </head>
+
+    <body>
+        <h3>Hello world</h3>
+        <button id="myButton">Click Me!</button>
+    </body>
+</html>
