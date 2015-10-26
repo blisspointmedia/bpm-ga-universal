@@ -28,7 +28,7 @@
           /*This needs to run on every page load to ensure we pick up session start times*/
           $(function() {
             if (typeof $.cookie('_bpmStartSession') === 'undefined') {
-                $.cookie('_bpmStartSession', new Date().getTime(), { expires: new Date(new Date().getTime() + (30 * 60 * 1000)) });
+                $.cookie('_bpmStartSession', new Date().getTime(), { expires: new Date(new Date().getTime() + (30 * 24 * 60 * 60 * 1000)) });
             }
           });
         </script>
